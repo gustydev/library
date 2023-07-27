@@ -1,0 +1,22 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: grid;
+    min-height: 100vh;
+    grid-template-rows: 10% 90%;
+}
+
+.logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(98, 0, 255);
+    color: rgb(0, 255, 200);
+}
+
+.main-container {
+    background-color: rgb(58, 51, 153);
+}
