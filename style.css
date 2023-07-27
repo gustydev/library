@@ -6,7 +6,7 @@
 body {
     display: grid;
     min-height: 100vh;
-    grid-template-rows: 10% 90%;
+    grid-template-rows: 1fr 9fr;
 }
 
 .logo {
@@ -14,9 +14,23 @@ body {
     justify-content: center;
     align-items: center;
     background-color: rgb(98, 0, 255);
-    color: rgb(0, 255, 200);
+    color: white;
 }
 
 .main-container {
     background-color: rgb(58, 51, 153);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-rows: repeat(auto-fit, minmax(100px, 200px));
+    gap: 25px;
+    padding: 25px;
+}
+
+.book {
+    color: white;
+    background-color: black;
+    border: 3px dashed darkred;
+    padding: 25px;
+    display: grid;
+    gap: 5px;
 }

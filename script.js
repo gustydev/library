@@ -1,4 +1,4 @@
-let library = [{author: 'Gusty', title: "Gusty's Book for Testing the Thing", pages: 42, read: false}];
+let library = [{author: 'Gusty', title: "Gusty's Book for Testing the Thing", pages: 42, read: 'no'}];
 
 const bookDisplay = document.querySelector('.main-container');
 
@@ -16,10 +16,13 @@ function addBook(author, title, pages, read) {
 }
 
 function updateLibrary() {
+    bookDisplay.innerHTML = ''; // Avoiding duplicates
     library.forEach(book => {
-      let newBook = document.createElement('div.book');
+      let newBook = document.createElement('div');
+      newBook.classList.add('book');
         for (const info in book) {
-            let bookInfo = document.createElement(`div.${info}`);
+            let bookInfo = document.createElement(`div`);
+            bookInfo.classList.add(`${info}`);
             bookInfo.textContent = `${info}: ${book[info]}`
             newBook.appendChild(bookInfo);
         }
@@ -27,4 +30,4 @@ function updateLibrary() {
 })
 };
 
-updateLibrary();
+updateLibrary(); // Might delete later when add button is on the page?
