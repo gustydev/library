@@ -23,7 +23,7 @@ function updateLibrary() {
         for (const info in book) {
             let bookInfo = document.createElement(`div`);
             bookInfo.classList.add(`${info}`);
-            bookInfo.textContent = `${info}: ${book[info]}`
+            bookInfo.innerHTML = `<strong>${info}</strong>: ${book[info]}`
             newBook.appendChild(bookInfo);
         }
         bookDisplay.appendChild(newBook);

@@ -15,13 +15,15 @@ body {
     align-items: center;
     background-color: rgb(98, 0, 255);
     color: white;
+    font-size: 48px;
 }
 
 .main-container {
     background-color: rgb(58, 51, 153);
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    grid-template-rows: repeat(auto-fit, minmax(100px, 200px));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 0.25fr));
+    grid-template-rows: repeat(auto-fit, minmax(150px, 0.25fr));
+    justify-content: center;
     gap: 25px;
     padding: 25px;
 }
@@ -29,8 +31,11 @@ body {
 .book {
     color: white;
     background-color: black;
-    border: 3px dashed darkred;
+    border: 3px dashed rgb(255, 255, 0);
     padding: 25px;
     display: grid;
+    align-items: center;
     gap: 5px;
+    overflow: auto;
+    text-overflow: ellipsis;
 }
