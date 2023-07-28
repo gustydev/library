@@ -1,4 +1,4 @@
-let library = [{author: 'Gusty', title: "Gusty's Book for Testing the Thing", pages: 42, read: 'no'}];
+let library = [{author: 'Gusty', title: "Gusty's Book", pages: 420, read: 'no'}];
 
 const bookDisplay = document.querySelector('.books');
 const addButton = document.querySelector('.book-add');
@@ -42,12 +42,14 @@ addButton.addEventListener('click', () => {
         let input = document.createElement('input');
         label.setAttribute('for', `${info}`);
         label.textContent = `${info}:`
-        input.setAttribute('for', `${info}`);
+        input.required = true;
+        input.setAttribute('id', `${info}`);
+        input.setAttribute('name', `${info}`);
         if (info === 'pages') {
             input.setAttribute('type', 'number');
         } else if (info === 'read') {
-            label.textContent = 'read?'
             input.setAttribute('type', 'checkbox');
+            label.textContent = 'read?'
         } else {
             input.setAttribute('type', 'text');
         }
@@ -57,6 +59,17 @@ addButton.addEventListener('click', () => {
     let submit = document.createElement('button');
     submit.setAttribute('type', 'submit');
     submit.textContent = 'Add';
+    submit.addEventListener('click', (e) => {
+        e.preventDefault();
+        let readCheck
+        if (read.checked === true) {
+            readCheck = 'yes'
+        } else {
+            readCheck = 'no'
+        }
+        addBook(author.value, title.value, pages.value, readCheck);
+        docBody.removeChild(bookForm);
+    })
     bookForm.appendChild(submit);
     docBody.appendChild(bookForm);
 })
