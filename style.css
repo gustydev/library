@@ -11,15 +11,32 @@ body {
 
 .logo {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: rgb(98, 0, 255);
+    background-color: red;
     color: white;
     font-size: 48px;
 }
 
+.book-add {
+    padding: 5px;
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    width: 100px;
+    justify-self: center;
+    align-self: end;
+}
+
 .main-container {
-    background-color: rgb(58, 51, 153);
+    background-color: rgb(0, 16, 107);
+    display: grid;
+    grid-template-rows: 50px 1fr;
+}
+
+.books {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 0.25fr));
     grid-template-rows: repeat(auto-fit, minmax(150px, 0.25fr));
@@ -38,4 +55,22 @@ body {
     gap: 5px;
     overflow: auto;
     text-overflow: ellipsis;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    width: 250px;
+    height: 150px;
+    background-color: white;
+    padding: 25px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+button[type='submit'] {
+    align-self: end;
 }
