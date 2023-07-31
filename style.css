@@ -68,6 +68,12 @@ body {
     color: red;
 }
 
+.cancel-form {
+    position: absolute;
+    top: 3%;
+    right: 2%;
+}
+
 form {
     display: flex;
     flex-direction: column;

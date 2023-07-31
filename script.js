@@ -51,8 +51,10 @@ addButton.addEventListener('click', () => {
         let label = document.createElement('label')
         let input = document.createElement('input');
         label.setAttribute('for', `${info}`);
-        label.textContent = `${info}:`
-        input.required = true;
+        label.textContent = `${info}*:`
+        if (!(info === 'read')) {
+            input.required = true;
+        }
         input.setAttribute('id', `${info}`);
         input.setAttribute('name', `${info}`);
         if (info === 'pages') {
@@ -71,16 +73,27 @@ addButton.addEventListener('click', () => {
     submit.textContent = 'Add';
     submit.addEventListener('click', (e) => {
         e.preventDefault();
-        let readCheck
-        if (read.checked === true) {
-            readCheck = 'yes'
+        let readCheck;
+        if (read.checked) {
+            readCheck = 'yes';
         } else {
-            readCheck = 'no'
+            readCheck = 'no';
         }
-        addBook(author.value, title.value, pages.value, readCheck);
+        if (bookForm.checkValidity()) {
+            addBook(author.value, title.value, pages.value, readCheck);
+            docBody.removeChild(bookForm);
+        } else {
+            alert('Please fill all of the required (*) fields.');
+        }
+    })
+    let cancel = document.createElement('button');
+    cancel.classList.add('cancel-form');
+    cancel.textContent = 'X'
+    cancel.addEventListener('click', () => {
         docBody.removeChild(bookForm);
     })
     bookForm.appendChild(submit);
+    bookForm.appendChild(cancel);
     if (!docBody.contains(document.getElementById('book-form'))) {
         docBody.appendChild(bookForm);
     }
