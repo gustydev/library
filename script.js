@@ -19,15 +19,24 @@ function addBook(author, title, pages, read) {
 
 function updateLibrary() {
     bookDisplay.innerHTML = ''; // Avoiding duplicates
-    library.forEach(book => {
+    library.forEach((book, index) => {
       let newBook = document.createElement('div');
       newBook.classList.add('book');
+      newBook.id = `${index}`;
         for (const info in book) {
             let bookInfo = document.createElement(`div`);
             bookInfo.classList.add(`${info}`);
             bookInfo.innerHTML = `<strong>${info}</strong>: ${book[info]}`
             newBook.appendChild(bookInfo);
         }
+        let bookDelete = document.createElement('button');
+        bookDelete.classList.add('book-delete')
+        bookDelete.textContent = 'X'
+        bookDelete.addEventListener('click', () => {
+            library.pop(index);
+            bookDisplay.removeChild(newBook);
+        })
+        newBook.prepend(bookDelete);
         bookDisplay.appendChild(newBook);
 })
 };
