@@ -46,6 +46,7 @@ updateLibrary(); // Might delete later when add button is on the page?
 addButton.addEventListener('click', () => {
     const infoList = ['author', 'title', 'pages', 'read'];
     const bookForm = document.createElement('form');
+    bookForm.id = ('book-form');
     infoList.forEach(info => {
         let label = document.createElement('label')
         let input = document.createElement('input');
@@ -80,5 +81,7 @@ addButton.addEventListener('click', () => {
         docBody.removeChild(bookForm);
     })
     bookForm.appendChild(submit);
-    docBody.appendChild(bookForm);
+    if (!docBody.contains(document.getElementById('book-form'))) {
+        docBody.appendChild(bookForm);
+    }
 })
