@@ -63,15 +63,30 @@ body {
     position: absolute;
     left: 2%;
     top: 3%;
-    border: 1px dotted red;
+    border: 1px dotted white;
     background-color: black;
+    color: white;
+}
+
+.book-delete:hover {
+    border: 1px dotted red;
     color: red;
+}
+
+#book-form, .book {
+    text-transform: capitalize;
+}
+
+#book-form > button[type='submit'] {
+    position: absolute;
+    bottom: 3%;
+    right: 3%;
 }
 
 .cancel-form {
     position: absolute;
     top: 3%;
-    right: 2%;
+    right: 3%;
 }
 
 form {
