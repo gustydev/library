@@ -54,26 +54,43 @@ body {
     flex-direction: column;
     justify-content: center;
     gap: 5px;
-    position: relative;
-    overflow: auto;
-    text-overflow: ellipsis;
+    position:relative;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space:pre;
 }
 
-.book-delete {
+.book-delete, .toggle-button {
     position: absolute;
-    left: 2%;
-    top: 3%;
-    border: 1px dotted white;
+    left: 1%;
+    top: 2%;
+    border: 2px solid white;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background-color: black;
     color: white;
 }
 
+.toggle-button {
+    left: 8%;
+}
+
 .book-delete:hover {
-    border: 1px dotted red;
+    border: 2px solid red;
     color: red;
 }
 
-#book-form, .book {
+.toggle-button:hover {
+    border: 2px solid rgb(0, 255, 0);
+    color: rgb(0, 255, 0);
+}
+
+#book-form {
     text-transform: capitalize;
 }
 

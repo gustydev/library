@@ -1,21 +1,32 @@
-let library = [{author: 'Gusty', title: "Gusty's Book", pages: 420, read: 'no'}];
+let library = [];
 
 const bookDisplay = document.querySelector('.books');
 const addButton = document.querySelector('.book-add');
 const docBody = document.querySelector('body');
 
 function Book(author, title, pages, read) {
-    this.author = author;
     this.title = title;
+    this.author = author;
     this.pages = pages;
     this.read = read;
+    this.toggleRead = function() {
+        if (this.read === 'yes') {
+            return this.read = 'no';
+        } else {
+            return this.read = 'yes';
+        }
+    }
 }
 
 function addBook(author, title, pages, read) {
     let newBook = new Book(author, title, pages, read);
+    console.log(newBook);
+    console.log(Object.getPrototypeOf(newBook))
     library.push(newBook);
     updateLibrary();
 }
+
+addBook("Gusty's Book", 'Gusty', 420,'no');
 
 function updateLibrary() {
     bookDisplay.innerHTML = ''; // Avoiding duplicates
@@ -24,10 +35,12 @@ function updateLibrary() {
       newBook.classList.add('book');
       newBook.id = `${index}`;
         for (const info in book) {
-            let bookInfo = document.createElement(`div`);
-            bookInfo.classList.add(`${info}`);
-            bookInfo.innerHTML = `<strong>${info}</strong>: ${book[info]}`
-            newBook.appendChild(bookInfo);
+            if (!(info === 'toggleRead')) {
+                let bookInfo = document.createElement(`div`);
+                bookInfo.classList.add(`${info}`);
+                bookInfo.innerHTML = `<strong style='text-transform:capitalize;'>${info}</strong>: ${book[info]}`
+                newBook.appendChild(bookInfo);
+            }
         }
         let bookDelete = document.createElement('button');
         bookDelete.classList.add('book-delete')
@@ -36,15 +49,21 @@ function updateLibrary() {
             library.pop(index);
             bookDisplay.removeChild(newBook);
         })
+        let toggleButton = document.createElement('button');
+        toggleButton.classList.add('toggle-button');
+        toggleButton.textContent = 'R'
+        toggleButton.addEventListener('click', () => {
+            book.toggleRead();
+            updateLibrary(); // apparently this is fine...?
+        })
+        newBook.prepend(toggleButton)
         newBook.prepend(bookDelete);
         bookDisplay.appendChild(newBook);
 })
 };
 
-updateLibrary(); // Might delete later when add button is on the page?
-
 addButton.addEventListener('click', () => {
-    const infoList = ['author', 'title', 'pages', 'read'];
+    const infoList = ['title', 'author', 'pages', 'read'];
     const bookForm = document.createElement('form');
     bookForm.id = ('book-form');
     infoList.forEach(info => {
