@@ -7,11 +7,31 @@
     <title>Library</title>
 </head>
 <body>
-    <h1 class="logo">Library</h1>
+    <h1 class="logo"><img src="images/bookshelf.png" alt="library icon"><div style='color: gold;'>g</div>library</h1>
     <div class="main-container">
-        <button class="book-add">Add book</button>
+        <button class="book-add"><img src="images/book-plus.png" alt="add book icon"></button>
         <div class="books"></div>
     </div>
+    <form id="book-form">
+        <div class="form-field">
+            <label for="title">title*:</label>
+            <input required="" id="title" name="title" type="text">
+        </div>
+        <div class="form-field">
+            <label for="author">author*:</label>
+            <input required="" id="author" name="author" type="text">
+        </div>
+        <div class="form-field">
+            <label for="pages">pages*:</label>
+            <input required="" id="pages" name="pages" type="number">
+        </div>
+        <div class="form-field">
+            <label for="read">read?</label>
+            <input id="read" name="read" type="checkbox">
+        </div>
+        <button type="submit" id="submit">Add</button>
+        <button class="cancel-form">X</button>
+    </form>
 </body>
 <script src="script.js"></script>
 </html>

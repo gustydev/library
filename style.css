@@ -1,6 +1,7 @@
 * {
     margin: 0;
     padding: 0;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 body {
@@ -11,35 +12,49 @@ body {
 
 .logo {
     display: flex;
-    flex-direction: column;
     justify-content: center;
-    align-items: center;
-    background-color: red;
-    color: white;
+    align-items: end;
+    background-color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
     font-size: 48px;
+}
+
+.logo > img {
+    width: 48px;
+    height: 48px;
+    filter: invert();
 }
 
 .book-add {
     padding: 5px;
-    background-color: black;
-    color: white;
-    font-weight: bold;
-    font-size: 16px;
-    width: 100px;
+    background-color: rgb(255, 255, 255);
     justify-self: center;
     align-self: end;
+    width: 40px;
+    height: 40px;
+    border: 2px solid black;
+    border-radius: 50%;
+}
+
+.book-add > img {
+    width: 100%;
+    height: 100%;
+}
+
+.book-add:hover {
+    background-color: gold;
 }
 
 .main-container {
-    background-color: rgb(0, 16, 107);
+    background-color: rgb(17, 17, 17);
     display: grid;
     grid-template-rows: 50px 1fr;
 }
 
 .books {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 0.25fr));
-    grid-template-rows: repeat(auto-fit, minmax(150px, 0.25fr));
+    grid-template-columns: repeat(auto-fit, minmax(250px, 0.25fr));
+    grid-template-rows: repeat(auto-fit, minmax(150px, fit-content));
     justify-content: center;
     gap: 25px;
     padding: 25px;
@@ -48,25 +63,24 @@ body {
 .book {
     color: white;
     background-color: black;
-    border: 3px dashed rgb(255, 255, 0);
+    border: 2px solid rgb(255, 255, 255);
     padding: 25px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 5px;
-    position:relative;
-    overflow-x: auto;
-    overflow-y: hidden;
-    white-space:pre;
+    position: relative;
+    word-break: break-all;
+    height: fit-content;
 }
 
-.book-delete, .toggle-button {
+.book-delete {
     position: absolute;
     left: 1%;
     top: 2%;
-    border: 2px solid white;
-    width: 18px;
-    height: 18px;
+    border: 0;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
     font-weight: bold;
     display: flex;
@@ -76,13 +90,36 @@ body {
     color: white;
 }
 
+#read-toggle {
+    font-weight: bold;
+    cursor: pointer;
+    width: fit-content;
+}
+
+#read-toggle:hover {
+    filter: opacity(75%);
+}
+
+.book-read {
+    color: rgb(0, 255, 0);
+}
+
+.not-read {
+    color: red;
+}
+
+.book-delete > img {
+    filter: invert();
+    width: 100%;
+    height: 100%;
+}
+
 .toggle-button {
     left: 8%;
 }
 
 .book-delete:hover {
-    border: 2px solid red;
-    color: red;
+    filter: invert();
 }
 
 .toggle-button:hover {
@@ -102,24 +139,57 @@ body {
 
 .cancel-form {
     position: absolute;
-    top: 3%;
-    right: 3%;
+    top: 2%;
+    right: 1%;
+    padding: 2px;
+    border: 1px solid white;
+    background-color: black;
+    color: white;
 }
 
-form {
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    width: 250px;
-    height: 150px;
-    background-color: white;
+.cancel-form:hover, button[type='submit']:hover {
+    filter: invert();
+}
+
+#book-form {
+    display: none;
+    gap: 8px;
+    background-color: rgb(0, 0, 0);
+    border: 2px solid white;
+    color: white;
     padding: 25px;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
+ 
+.form-field {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 4px;
+    width: 100%;
+} 
+
+.form-field > input {
+    background-color: rgb(0, 0, 0);
+    border: 1px solid white;
+    color: white;
+    padding: 4px;
+}
+
+.form-field:last-of-type {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 
 button[type='submit'] {
-    align-self: end;
+    border: 1px solid white;
+    padding: 5px;
+    background-color: black;
+    color: white;
+    font-weight: bold;
 }
+

@@ -10,23 +10,19 @@ function Book(author, title, pages, read) {
     this.pages = pages;
     this.read = read;
     this.toggleRead = function() {
-        if (this.read === 'yes') {
-            return this.read = 'no';
+        if (this.read) {
+            return this.read = false;
         } else {
-            return this.read = 'yes';
+            return this.read = true;
         }
     }
 }
 
 function addBook(author, title, pages, read) {
     let newBook = new Book(author, title, pages, read);
-    console.log(newBook);
-    console.log(Object.getPrototypeOf(newBook))
     library.push(newBook);
     updateLibrary();
 }
-
-addBook("Gusty's Book", 'Gusty', 420,'no');
 
 function updateLibrary() {
     bookDisplay.innerHTML = ''; // Avoiding duplicates
@@ -36,84 +32,64 @@ function updateLibrary() {
       newBook.id = `${index}`;
         for (const info in book) {
             if (!(info === 'toggleRead')) {
-                let bookInfo = document.createElement(`div`);
-                bookInfo.classList.add(`${info}`);
-                bookInfo.innerHTML = `<strong style='text-transform:capitalize;'>${info}</strong>: ${book[info]}`
-                newBook.appendChild(bookInfo);
+                if (info === 'read') {
+                    let bookInfo = document.createElement('div');
+                    bookInfo.classList.add(`${info}`);
+                    bookInfo.id = 'read-toggle'
+                    if (book[info] === true) {
+                        bookInfo.classList.add('book-read');
+                        bookInfo.innerHTML = 'Read';
+                    } else {
+                        bookInfo.classList.add('not-read');
+                        bookInfo.innerHTML = 'Not Read';
+                    }
+                    bookInfo.addEventListener('click', () => {
+                        book.toggleRead();
+                        updateLibrary();
+                    })
+                    newBook.appendChild(bookInfo);
+                } else {
+                    let bookInfo = document.createElement(`div`);
+                    bookInfo.classList.add(`${info}`);
+                    bookInfo.innerHTML = `<strong style='text-transform:capitalize;'>${info}</strong>: ${book[info]}`
+                    newBook.appendChild(bookInfo);
+                }
             }
         }
         let bookDelete = document.createElement('button');
         bookDelete.classList.add('book-delete')
-        bookDelete.textContent = 'X'
+        bookDelete.innerHTML = "<img src='images/delete-outline.png'>";
         bookDelete.addEventListener('click', () => {
             library.pop(index);
             bookDisplay.removeChild(newBook);
         })
-        let toggleButton = document.createElement('button');
-        toggleButton.classList.add('toggle-button');
-        toggleButton.textContent = 'R'
-        toggleButton.addEventListener('click', () => {
-            book.toggleRead();
-            updateLibrary(); // apparently this is fine...?
-        })
-        newBook.prepend(toggleButton)
         newBook.prepend(bookDelete);
         bookDisplay.appendChild(newBook);
 })
 };
 
+const bookForm = document.querySelector('form');
+const submit = document.querySelector('button#submit');
+const cancel = document.querySelector('button.cancel-form');
+
 addButton.addEventListener('click', () => {
-    const infoList = ['title', 'author', 'pages', 'read'];
-    const bookForm = document.createElement('form');
-    bookForm.id = ('book-form');
-    infoList.forEach(info => {
-        let label = document.createElement('label')
-        let input = document.createElement('input');
-        label.setAttribute('for', `${info}`);
-        label.textContent = `${info}*:`
-        if (!(info === 'read')) {
-            input.required = true;
-        }
-        input.setAttribute('id', `${info}`);
-        input.setAttribute('name', `${info}`);
-        if (info === 'pages') {
-            input.setAttribute('type', 'number');
-        } else if (info === 'read') {
-            input.setAttribute('type', 'checkbox');
-            label.textContent = 'read?'
-        } else {
-            input.setAttribute('type', 'text');
-        }
-        bookForm.appendChild(label);
-        bookForm.appendChild(input);
-    })
-    let submit = document.createElement('button');
-    submit.setAttribute('type', 'submit');
-    submit.textContent = 'Add';
-    submit.addEventListener('click', (e) => {
-        e.preventDefault();
-        let readCheck;
-        if (read.checked) {
-            readCheck = 'yes';
-        } else {
-            readCheck = 'no';
-        }
-        if (bookForm.checkValidity()) {
-            addBook(author.value, title.value, pages.value, readCheck);
-            docBody.removeChild(bookForm);
-        } else {
-            alert('Please fill all of the required (*) fields.');
-        }
-    })
-    let cancel = document.createElement('button');
-    cancel.classList.add('cancel-form');
-    cancel.textContent = 'X'
-    cancel.addEventListener('click', () => {
-        docBody.removeChild(bookForm);
-    })
-    bookForm.appendChild(submit);
-    bookForm.appendChild(cancel);
-    if (!docBody.contains(document.getElementById('book-form'))) {
-        docBody.appendChild(bookForm);
+    if (!bookForm.style.display) {
+        bookForm.style.display = 'grid';
+    };
+});
+
+submit.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (bookForm.checkValidity()) {
+        addBook(author.value, title.value, pages.value, read.checked);
+        bookForm.style.display = '';
+        bookForm.reset();
+    } else {
+        alert('Please fill all of the required (*) fields.');
     }
+})
+
+cancel.addEventListener('click', (e) => {
+    e.preventDefault();
+    bookForm.style.display = '';
 })
