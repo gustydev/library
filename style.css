@@ -111,7 +111,6 @@ body {
 }
 
 #book-form {
-    text-transform: capitalize;
     display: none;
     gap: 8px;
     background-color: rgb(0, 0, 0);
