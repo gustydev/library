@@ -58,7 +58,7 @@ function updateLibrary() {
         }
         let bookDelete = document.createElement('button');
         bookDelete.classList.add('book-delete')
-        bookDelete.innerHTML = "<img src='images/delete-outline.png'>";
+        bookDelete.innerHTML = "<img src='images/delete-outline.png' alt='delete book'>";
         bookDelete.addEventListener('click', () => {
             library.pop(index);
             bookDisplay.removeChild(newBook);
@@ -85,7 +85,7 @@ submit.addEventListener('click', (e) => {
         bookForm.style.display = '';
         bookForm.reset();
     } else {
-        alert('Please fill all of the required (*) fields.');
+        alert('Please fill at least the first three fields.');
     }
 })
 
