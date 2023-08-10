@@ -1,2 +1,2 @@
 # library
-Web library app using JavaScript objects
+Web library made with JavaScript objects
