@@ -79,13 +79,10 @@ addButton.addEventListener('click', () => {
 });
 
 submit.addEventListener('click', (e) => {
-    e.preventDefault();
     if (bookForm.checkValidity()) {
         addBook(author.value, title.value, pages.value, read.checked);
         bookForm.style.display = '';
         bookForm.reset();
-    } else {
-        alert('Please fill at least the first three fields.');
     }
 })
 
